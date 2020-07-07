@@ -1,0 +1,13 @@
+type Query {
+  hello: String
+  saludo: String
+  getCourses: [Course]
+}
+
+type Course {
+  _id: ID
+  title: String
+  professor: String
+  description: String
+  topic: String
+}
