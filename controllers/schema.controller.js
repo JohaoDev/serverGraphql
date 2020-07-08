@@ -14,8 +14,8 @@ const { makeExecutableSchema } = require("graphql-tools"),
   });
 
 let startGraphql = graphqlHTTP({
-  schema: schema,
-  rootValue: courseResolver,
+  schema,
+  // rootValue: courseResolver,
   graphiql: true,
 });
 

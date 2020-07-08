@@ -1,13 +1,42 @@
 type Query {
   hello: String
   saludo: String
+
+  getCourse(id: ID!): Course
+  getCourses2(title: String): [Course]
   getCourses: [Course]
 }
 
 type Course {
-  _id: ID
+  id: ID
   title: String
   professor: String
   description: String
   topic: String
+}
+
+type Mutation {
+  createCourse(input: CourseInput): [Course]
+
+  updateCourse(
+    id: ID!
+    title: String
+    professor: String
+    description: String
+    topic: String
+  ): Course
+
+  deleteCourse(id: ID!): DeleteResponse
+}
+
+input CourseInput {
+  id: ID!
+  title: String
+  professor: String
+  description: String
+  topic: String
+}
+
+type DeleteResponse {
+  ok: Boolean!
 }
