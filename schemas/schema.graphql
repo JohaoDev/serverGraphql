@@ -1,42 +1,71 @@
 type Query {
-  hello: String
-  saludo: String
-
-  getCourse(id: ID!): Course
-  getCourses2(title: String): [Course]
   getCourses: [Course]
-}
+  getCourse(_id: ID!): [Course]
 
-type Course {
-  id: ID
-  title: String
-  professor: String
-  description: String
-  topic: String
+  getStudents: [User]
+  getStudent(_id: ID!): [User]
 }
 
 type Mutation {
-  createCourse(input: CourseInput): [Course]
+  createCourse(input: CourseInput!): [Course]
+  updateCourse(_id: ID!, input: EditCourseInput): [Course]
+  deleteCourse(_id: ID!): [Course]
 
-  updateCourse(
-    id: ID!
-    title: String
-    professor: String
-    description: String
-    topic: String
-  ): Course
-
-  deleteCourse(id: ID!): DeleteResponse
+  createStudent(input: StudentInput!): [User]
+  updateStudent(_id: ID!, input: EditStudentInput): [User]
+  deleteStudent(_id: ID!): [User]
 }
 
 input CourseInput {
-  id: ID!
   title: String
   professor: String
   description: String
   topic: String
 }
 
-type DeleteResponse {
-  ok: Boolean!
+input StudentInput {
+  name: String
+  lastname: String
+  age: String
+  email: String
+  profile_pic: String
+  password: String
+  role: String
+}
+
+input EditCourseInput {
+  title: String
+  professor: String
+  description: String
+  topic: String
+  participants: [ID]
+}
+
+input EditStudentInput {
+  name: String
+  lastname: String
+  age: String
+  email: String
+  profile_pic: String
+  password: String
+}
+
+type User {
+  _id: ID!
+  name: String
+  lastname: String
+  age: String
+  email: String
+  profile_pic: String
+  password: String
+  role: String
+}
+
+type Course {
+  _id: ID!
+  title: String
+  professor: String
+  description: String
+  topic: String
+  participants: [User]
 }
