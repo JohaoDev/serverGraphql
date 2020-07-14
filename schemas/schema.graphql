@@ -1,9 +1,20 @@
+enum Level {
+  Basic
+  intermediate
+  Advanced
+}
+
+enum AcademicTitle {
+  Tecnologic
+  Master
+}
+
 type Query {
   getCourses: [Course]
   getCourse(_id: ID!): [Course]
 
-  getStudents: [User]
-  getStudent(_id: ID!): [User]
+  getUsers: [User]
+  getUser(_id: ID!): [User]
 }
 
 type Mutation {
@@ -11,9 +22,9 @@ type Mutation {
   updateCourse(_id: ID!, input: EditCourseInput): [Course]
   deleteCourse(_id: ID!): [Course]
 
-  createStudent(input: StudentInput!): [User]
-  updateStudent(_id: ID!, input: EditStudentInput): [User]
-  deleteStudent(_id: ID!): [User]
+  createUser(input: UserInput!): [User]
+  updateUser(_id: ID!, input: EditUserInput): [User]
+  deleteUser(_id: ID!): [User]
 }
 
 input CourseInput {
@@ -21,16 +32,7 @@ input CourseInput {
   professor: String
   description: String
   topic: String
-}
-
-input StudentInput {
-  name: String
-  lastname: String
-  age: String
-  email: String
-  profile_pic: String
-  password: String
-  role: String
+  level: Level
 }
 
 input EditCourseInput {
@@ -39,19 +41,10 @@ input EditCourseInput {
   description: String
   topic: String
   participants: [ID]
+  level: Level
 }
 
-input EditStudentInput {
-  name: String
-  lastname: String
-  age: String
-  email: String
-  profile_pic: String
-  password: String
-}
-
-type User {
-  _id: ID!
+input UserInput {
   name: String
   lastname: String
   age: String
@@ -59,13 +52,59 @@ type User {
   profile_pic: String
   password: String
   role: String
+  title: AcademicTitle
+}
+
+input EditUserInput {
+  name: String
+  lastname: String
+  age: String
+  email: String
+  profile_pic: String
+  password: String
+  title: AcademicTitle
 }
 
 type Course {
   _id: ID!
   title: String
-  professor: String
+  professor: Professor
   description: String
   topic: String
   participants: [User]
+  level: Level
+}
+
+interface User {
+  _id: ID!
+  name: String
+  lastname: String
+  email: String
+  profile_pic: String
+  password: String
+  role: String
+}
+
+type Student implements User {
+  # _id: ID!
+  # name: String
+  # lastname: String
+  # age: String
+  # email: String
+  # profile_pic: String
+  # password: String
+  # role: String
+  test: String
+}
+
+type Professor implements User {
+  # _id: ID!
+  # name: String
+  # lastname: String
+  # age: String
+  # email: String
+  # profile_pic: String
+  # password: String
+  # role: String
+  academicTitle: AcademicTitle
 }

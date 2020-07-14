@@ -1,7 +1,7 @@
 let User = require("../../models/userModel");
 
 module.exports = {
-  createStudent: async (_, { input }) => {
+  createUser: async (_, { input }) => {
     let users;
     try {
       await User.create(input);
@@ -12,7 +12,7 @@ module.exports = {
     return users;
   },
 
-  updateStudent: async (_, { _id, input }) => {
+  updateUser: async (_, { _id, input }) => {
     let user;
     try {
       await User.updateOne({ _id }, { $set: input });
@@ -23,7 +23,7 @@ module.exports = {
     return user;
   },
 
-  deleteStudent: async (_, { _id }) => {
+  deleteUser: async (_, { _id }) => {
     let users;
     try {
       await User.deleteOne({ _id });
